@@ -295,7 +295,7 @@ def create_track_file(maindir,trackid,track,song,artist,mbconnect=None):
         # close hdf5
         try:
             h5.close()
-        except NameError,ValueError:
+        except (NameError,ValueError):
             pass
         # delete path
         try:
@@ -306,7 +306,7 @@ def create_track_file(maindir,trackid,track,song,artist,mbconnect=None):
         except IOError:
             pass
         raise
-    except (IOError,OSError),e:
+    except (IOError,OSError,e):
         print ('GOT Error',e,'deep deep in creation process, threading problem?')
         raise
     # IF WE GET HERE WE'RE GOOD
@@ -349,11 +349,11 @@ def create_track_file_from_trackid(maindir,trackid,song,artist,mbconnect=None):
         except KeyboardInterrupt:
             close_creation()
             raise
-        except urllib2.HTTPError,e:
+        except (urllib2.HTTPError,e):
             print (type(e),':',e)
             print ('we dont retry for that error, trackid=',trackid,'(pid='+str(os.getpid())+')')
             return False
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_file_from_trackid, tid=',trackid,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             if try_cnt < 50:
@@ -392,15 +392,15 @@ def create_track_file_from_song(maindir,song,artist,mbconnect=None):
             tracks = song.get_tracks(CATALOG)
             trackid = tracks[0]['id']
             break
-        except (IndexError, TypeError),e:
+        except (IndexError, TypeError,e):
             return False # should not happen according to EN guys, but still does...
-        except TypeError,e:
+        except (TypeError,e):
             print ('ERROR:',e,' something happened that should not, song.id =',song.id,'(pid='+str(os.getpid())+')')
             return False # should not happen according to EN guys, but still does...
         except KeyboardInterrupt:
             close_creation()
             raise
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_file_from_song, sid=',song.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
@@ -436,11 +436,11 @@ def create_track_file_from_song_noartist(maindir,song,mbconnect=None):
         except KeyboardInterrupt:
             close_creation()
             raise
-        except pyechonest.util.EchoNestAPIError,e:
+        except (pyechonest.util.EchoNestAPIError,e):
             print ('MAJOR ERROR, wrong artist id?')
             print (e) # means the ID does not exist
             return False
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_files_from_song_noartist, sid=',song.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
@@ -487,7 +487,7 @@ def create_track_files_from_artist(maindir,artist,mbconnect=None,maxsongs=100):
         except KeyboardInterrupt:
             close_creation()
             raise
-        except pyechonest.util.EchoNestAPIError,e:
+        except (pyechonest.util.EchoNestAPIError,e):
             if str(e)[:21] == 'Echo Nest API Error 5': # big hack, wrong artist ID
                 print ('SKIPPING ARTIST',artist.id,'FOR NONEXISTENCE')
                 return 0
@@ -496,7 +496,7 @@ def create_track_files_from_artist(maindir,artist,mbconnect=None,maxsongs=100):
                 print ('at time',time.ctime(),'in create_track_file_from_artist, aid=',artist.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
                 time.sleep(SLEEPTIME)
                 continue
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_files_from_artist, aid=',artist.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
@@ -541,11 +541,11 @@ def create_track_files_from_artistid(maindir,artistid,mbconnect=None,maxsongs=10
         except KeyboardInterrupt:
             close_creation()
             raise
-        except pyechonest.util.EchoNestAPIError,e:
+        except (pyechonest.util.EchoNestAPIError,e):
             print ('MAJOR ERROR, wrong artist id?',artistid)
             print (e) # means the ID does not exist
             return 0
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_files_from_artistid, aid=',artistid,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
@@ -611,7 +611,7 @@ def get_most_familiar_artists(nresults=100):
         except KeyboardInterrupt:
             close_creation()
             raise
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in get_most_familiar_artists (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -637,7 +637,7 @@ def search_songs(**args):
         except (KeyboardInterrupt,NameError):
             close_creation()
             raise
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in search songs [params='+str(args)+'] (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -661,7 +661,7 @@ def get_artists_from_description(description,nresults=100):
         except (KeyboardInterrupt,NameError):
             close_creation()
             raise
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in get_artistids_from_description (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -681,7 +681,7 @@ def get_similar_artists(artist):
         except (KeyboardInterrupt,NameError):
             close_creation()
             raise
-        except pyechonest.util.EchoNestAPIError,e:
+        except (pyechonest.util.EchoNestAPIError,e):
             if str(e)[:21] == 'Echo Nest API Error 5': # big hack, wrong artist ID
                 print ('SKIPPING ARTIST',artist.id,'FOR NONEXISTENCE')
                 return []
@@ -690,7 +690,7 @@ def get_similar_artists(artist):
                 print ('at time',time.ctime(),'in get_similar_artists from aid =',artist.id,'(we wait',SLEEPTIME,'seconds)')
                 time.sleep(SLEEPTIME)
                 continue
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in get_similar_artists from aid =',artist.id,'(we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -718,7 +718,7 @@ def get_artist_song_from_names(artistname,songtitle):
         except (KeyboardInterrupt,NameError,TypeError):
             close_creation()
             raise
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in get_artist_song_from_names (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -738,11 +738,11 @@ def get_artist_song_from_names(artistname,songtitle):
         except KeyboardInterrupt:
             close_creation()
             raise
-        except pyechonest.util.EchoNestAPIError,e:
+        except (pyechonest.util.EchoNestAPIError,e):
             print ('MAJOR ERROR, wrong artist id?',song.artist_id)
             print (e) # means the ID does not exist
             return None,None
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in get_artist_song_from_names, aid=',song.artist_id,'(we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -875,12 +875,12 @@ def create_step30(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0):
         except KeyboardInterrupt:
             close_creation()
             raise
-        except IndexError, e:
+        except (IndexError, e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in step20 retrieving CAL500 - response too short! (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in step20 retrieving CAL500 (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
@@ -1193,7 +1193,7 @@ if __name__ == '__main__':
         print ('stopping multiprocessing due to a keyboard interrupt')
         pool.terminate()
         pool.join()
-    except Exception, e:
+    except (Exception, e):
         print ('MULTIPROCESSING')
         print ('got exception: %r, terminating the pool' % (e,))
         pool.terminate()
