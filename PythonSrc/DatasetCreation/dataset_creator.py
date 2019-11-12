@@ -54,7 +54,7 @@ try:
     _api_dev_key = os.environ['ECHO_NEST_API_KEY']
 except KeyError:
     _api_dev_key = os.environ['ECHONEST_API_KEY']
- posgresql import and info for musicbrainz dataset
+ #posgresql import and info for musicbrainz dataset
 MBUSER='gordon'
 MBPASSWD='gordon'
 
