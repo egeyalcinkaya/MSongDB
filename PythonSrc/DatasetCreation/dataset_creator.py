@@ -49,10 +49,10 @@ from pyechonest import artist as artistEN
 from pyechonest import song as songEN
 from pyechonest import track as trackEN
 CATALOG='7digital'
-try:
-    _api_dev_key = os.environ['ECHO_NEST_API_KEY']
-except KeyError:
-    _api_dev_key = os.environ['ECHONEST_API_KEY']
+#try:
+ #   _api_dev_key = os.environ['ECHO_NEST_API_KEY']
+#except KeyError:
+#    _api_dev_key = os.environ['ECHONEST_API_KEY']
  #posgresql import and info for musicbrainz dataset
 MBUSER='gordon'
 MBPASSWD='gordon'
