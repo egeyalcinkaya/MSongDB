@@ -782,7 +782,7 @@ def create_step10(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0,verbose=0):
         t1 = time.time()
         nh5 = count_h5_files(maindir)
         t2 = time.time()
-        print ('found',nh5,'h5 song files in',maindir,'in',int(t2-t1),'seconds (pid='+str(os.getpid())+')'; sys.stdout.flush())
+        print ('found',nh5,'h5 song files in',maindir,'in',int(t2-t1),'seconds (pid='+str(os.getpid())+')', sys.stdout.flush())
         # sanity stop
         if nh5 > TOTALNFILES - nfilesbuffer:
             return cnt_created
@@ -820,7 +820,7 @@ def create_step20(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0,verbose=0):
         if CREATION_CLOSED:
             return cnt_created
         # verbose
-        print ('doing term',termid,'out of',len(most_used_terms),'(pid='+str(os.getpid())+')'; sys.stdout.flush())
+        print ('doing term',termid,'out of',len(most_used_terms),'(pid='+str(os.getpid())+')', sys.stdout.flush())
         # get all artists from that term as a description
         artists = get_artists_from_description(term,nresults=100)
         npr.shuffle(artists)
@@ -839,7 +839,7 @@ def create_step20(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0,verbose=0):
                                                           maxsongs=maxsongs)
             # sanity stop
             nh5 = count_h5_files(maindir)
-            print ('found',nh5,'h5 song files in',maindir,'(pid='+str(os.getpid())+')'; sys.stdout.flush())
+            print ('found',nh5,'h5 song files in',maindir,'(pid='+str(os.getpid())+')', sys.stdout.flush())
             if nh5 > TOTALNFILES - nfilesbuffer:
                 return cnt_created
     # done
@@ -894,11 +894,11 @@ def create_step30(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0):
             return cnt_created
         # sanity stop
         nh5 = count_h5_files(maindir)
-        print ('found',nh5,'h5 song files in',maindir; sys.stdout.flush())
+        print ('found',nh5,'h5 song files in',maindir, sys.stdout.flush())
         if nh5 > TOTALNFILES - nfilesbuffer:
             return cnt_created
         # verbose
-        print ('doing line',lineid,'out of',len(lines),'(pid='+str(os.getpid())+')'; sys.stdout.flush())
+        print ('doing line',lineid,'out of',len(lines),'(pid='+str(os.getpid())+')', sys.stdout.flush())
         # parse line
         artiststr = line.split('<SEP>')[0]
         songstr = line.split('<SEP>')[1]
@@ -955,11 +955,11 @@ def create_step40(maindir,mbconnect=None,maxsongs=100,nfilesbuffer=0):
         if CREATION_CLOSED:
             return cnt_created
         nh5 = count_h5_files(maindir)
-        print ('found',nh5,'h5 song files in',maindir; sys.stdout.flush())
+        print ('found',nh5,'h5 song files in',maindir, sys.stdout.flush())
         if nh5 > TOTALNFILES - nfilesbuffer:
             return cnt_created
         # verbose
-        print ('doing search args',argsid,'out of',len(all_args),'(pid='+str(os.getpid())+')'; sys.stdout.flush())
+        print ('doing search args',argsid,'out of',len(all_args),'(pid='+str(os.getpid())+')', sys.stdout.flush())
         # songs
         songs = search_songs(**args)
         if len(songs) == 0:
@@ -1005,11 +1005,11 @@ def create_step60(maindir,mbconnect=None,maxsongs=100,nfilesbuffer=0):
             break
         if cnt_artists % 10 == 0:
             nh5 = count_h5_files(maindir)
-            print ('found',nh5,'h5 song files in',maindir; sys.stdout.flush())
+            print ('found',nh5,'h5 song files in',maindir, sys.stdout.flush())
             if nh5 > TOTALNFILES - nfilesbuffer:
                 return cnt_created
         # verbose
-        print ('doing artist',cnt_artists,'(pid='+str(os.getpid())+')'; sys.stdout.flush())
+        print ('doing artist',cnt_artists,'(pid='+str(os.getpid())+')', sys.stdout.flush())
         # encode that artist unless it was done in step10
         #if cnt_artists > n_most_familiars:
         # we had to relaunch this function, lets not redo all the same artists over and over
