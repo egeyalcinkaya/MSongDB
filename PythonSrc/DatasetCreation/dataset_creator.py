@@ -775,7 +775,7 @@ def create_step10(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0,verbose=0):
         # CLOSED CREATION?
         if CREATION_CLOSED:
             break
-        if verbose>0: print ('doing artist:',artist; sys.stdout.flush())
+        if verbose>0: print ('doing artist:',artist, sys.stdout.flush())
         cnt_created += create_track_files_from_artist(maindir,artist,
                                                       mbconnect=mbconnect,
                                                       maxsongs=maxsongs)
