@@ -171,7 +171,7 @@ def release_lock_track(trackid):
         return False
     if not trackid in TRACKSET:
         TRACKSET_LOCK.release()
-        print ('WARNING: releasing a song you dont own, trackid=',trackid;sys.stdout.flush())
+        print ('WARNING: releasing a song you dont own, trackid='),trackid;sys.stdout.flush()
         return False
     TRACKSET.remove(trackid)
     TRACKSET_LOCK.release()
