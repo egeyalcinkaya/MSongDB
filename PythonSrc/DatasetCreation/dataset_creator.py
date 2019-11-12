@@ -202,7 +202,7 @@ def count_h5_files(basedir):
             files = glob.glob(os.path.join(root,'*.h5'))
             cnt += len(files)
         return cnt
-    except (IOError,OSError) e:
+    except (IOError,OSError, e):
         print ('ERROR:',e,'in count_h5_files, return 0')
         return 0
 
