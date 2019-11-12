@@ -104,7 +104,7 @@ class my_trackset():
             if self.ar[k] == 0:
                 self.ar[k] = objh
                 return
-        print 'ERROR: shared memory trackset full!!! fake a keyboardinterrupt to stop'
+        print ('ERROR: shared memory trackset full!!! fake a keyboardinterrupt to stop')
         raise KeyboardInterrupt
     def __contains__(self,obj):
         return hash(obj) in self.ar
