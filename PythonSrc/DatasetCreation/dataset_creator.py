@@ -275,7 +275,7 @@ def create_track_file(maindir,trackid,track,song,artist,mbconnect=None):
                     pass
                 # print and wait
                 print ('ERROR creating track:',trackid,'on',time.ctime(),'(pid='+str(os.getpid())+')')
-                print e
+                print (e)
                 if try_cnt < 100:
                     print ('(try again in',SLEEPTIME,'seconds)')
                     time.sleep(SLEEPTIME)
@@ -350,11 +350,11 @@ def create_track_file_from_trackid(maindir,trackid,song,artist,mbconnect=None):
             close_creation()
             raise
         except urllib2.HTTPError,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('we dont retry for that error, trackid=',trackid,'(pid='+str(os.getpid())+')')
             return False
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_file_from_trackid, tid=',trackid,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             if try_cnt < 50:
                 time.sleep(SLEEPTIME)
@@ -401,7 +401,7 @@ def create_track_file_from_song(maindir,song,artist,mbconnect=None):
             close_creation()
             raise
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_file_from_song, sid=',song.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
             continue
@@ -438,10 +438,10 @@ def create_track_file_from_song_noartist(maindir,song,mbconnect=None):
             raise
         except pyechonest.util.EchoNestAPIError,e:
             print ('MAJOR ERROR, wrong artist id?')
-            print e # means the ID does not exist
+            print (e) # means the ID does not exist
             return False
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_files_from_song_noartist, sid=',song.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
             continue
@@ -492,12 +492,12 @@ def create_track_files_from_artist(maindir,artist,mbconnect=None,maxsongs=100):
                 print ('SKIPPING ARTIST',artist.id,'FOR NONEXISTENCE')
                 return 0
             else:
-                print type(e),':',e
+                print (type(e),':',e)
                 print ('at time',time.ctime(),'in create_track_file_from_artist, aid=',artist.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
                 time.sleep(SLEEPTIME)
                 continue
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_files_from_artist, aid=',artist.id,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
             continue
@@ -543,10 +543,10 @@ def create_track_files_from_artistid(maindir,artistid,mbconnect=None,maxsongs=10
             raise
         except pyechonest.util.EchoNestAPIError,e:
             print ('MAJOR ERROR, wrong artist id?',artistid)
-            print e # means the ID does not exist
+            print (e) # means the ID does not exist
             return 0
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in create_track_files_from_artistid, aid=',artistid,'(we wait',SLEEPTIME,'seconds) (pid='+str(os.getpid())+')')
             time.sleep(SLEEPTIME)
             continue
@@ -581,7 +581,7 @@ def get_top_terms(nresults=1000):
             close_creation()
             raise
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in get_top_terms (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -612,7 +612,7 @@ def get_most_familiar_artists(nresults=100):
             close_creation()
             raise
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in get_most_familiar_artists (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -638,7 +638,7 @@ def search_songs(**args):
             close_creation()
             raise
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in search songs [params='+str(args)+'] (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -662,7 +662,7 @@ def get_artists_from_description(description,nresults=100):
             close_creation()
             raise
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in get_artistids_from_description (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -686,12 +686,12 @@ def get_similar_artists(artist):
                 print ('SKIPPING ARTIST',artist.id,'FOR NONEXISTENCE')
                 return []
             else:
-                print type(e),':',e
+                print (type(e),':',e)
                 print ('at time',time.ctime(),'in get_similar_artists from aid =',artist.id,'(we wait',SLEEPTIME,'seconds)')
                 time.sleep(SLEEPTIME)
                 continue
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in get_similar_artists from aid =',artist.id,'(we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -719,7 +719,7 @@ def get_artist_song_from_names(artistname,songtitle):
             close_creation()
             raise
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in get_artist_song_from_names (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -740,10 +740,10 @@ def get_artist_song_from_names(artistname,songtitle):
             raise
         except pyechonest.util.EchoNestAPIError,e:
             print ('MAJOR ERROR, wrong artist id?',song.artist_id)
-            print e # means the ID does not exist
+            print (e) # means the ID does not exist
             return None,None
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in get_artist_song_from_names, aid=',song.artist_id,'(we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
@@ -876,12 +876,12 @@ def create_step30(maindir,mbconnect=None,maxsongs=500,nfilesbuffer=0):
             close_creation()
             raise
         except IndexError, e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in step20 retrieving CAL500 - response too short! (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
         except Exception,e:
-            print type(e),':',e
+            print (type(e),':',e)
             print ('at time',time.ctime(),'in step20 retrieving CAL500 (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
             continue
