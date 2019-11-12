@@ -33,9 +33,7 @@ import copy
 import time
 from Queue import Queue   # from 'queue' in python 3.0
 import shutil
-import requests
-from urllib.requests import urlopen
-html = urlopen("http://www.google.com/").read()
+import urllib2
 import multiprocessing
 import numpy.random as npr
 try:
