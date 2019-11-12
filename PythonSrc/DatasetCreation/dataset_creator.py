@@ -31,7 +31,7 @@ import sys
 import glob
 import copy
 import time
-from queue import Queue   # from 'queue' in python 3.0
+from Queue import Queue   # from 'queue' in python 3.0
 import shutil
 from urllib.request import urlopen
 html = urlopen("http://www.google.com/").read()
