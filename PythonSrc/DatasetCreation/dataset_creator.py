@@ -31,7 +31,7 @@ import sys
 import glob
 import copy
 import time
-from queue import queue   # from 'queue' in python 3.0
+from queue import Queue   # from 'queue' in python 3.0
 import shutil
 import urllib2
 import multiprocessing
