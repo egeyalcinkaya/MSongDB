@@ -266,7 +266,7 @@ def create_track_file(maindir,trackid,track,song,artist,mbconnect=None):
                 # close hdf5
                 try:
                     h5.close()
-                except NameError,ValueError:
+                except (NameError, ValueError):
                     pass
                 # delete path
                 try:
