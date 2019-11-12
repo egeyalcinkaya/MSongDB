@@ -97,7 +97,7 @@ class my_trackset():
             if self.ar[k] == objh:
                 self.ar[k] = 0
                 return
-        print 'ERROR: my_trackset, tried to remove inexisting element, obj=',obj,'and hash=',objh
+        print ('ERROR: my_trackset, tried to remove inexisting element, obj=',obj,'and hash=',objh)
     def add(self,obj):
         objh = hash(obj)
         for k in range(len(self.ar)):
