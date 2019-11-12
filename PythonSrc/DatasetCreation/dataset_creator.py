@@ -35,7 +35,6 @@ from queue import Queue   # from 'queue' in python 3.0
 import shutil
 from urllib.request import urlopen
 html = urlopen("http://www.google.com/").read()
-print(html)
 import multiprocessing
 import numpy.random as npr
 try:
