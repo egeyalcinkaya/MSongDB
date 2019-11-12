@@ -580,7 +580,7 @@ def get_top_terms(nresults=1000):
         except (KeyboardInterrupt,NameError):
             close_creation()
             raise
-        except Exception,e:
+        except (Exception,e):
             print (type(e),':',e)
             print ('at time',time.ctime(),'in get_top_terms (we wait',SLEEPTIME,'seconds)')
             time.sleep(SLEEPTIME)
